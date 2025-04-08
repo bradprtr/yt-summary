@@ -2,7 +2,14 @@
 
 A script which downloads transcripts of YouTube videos (using auto-generated or manually added subtitles) and summarises them using [**llm**](https://github.com/simonw/llm).
 
-Requires [**yt-dlp**](https://github.com/yt-dlp/yt-dlp) and [**llm**](https://github.com/simonw/llm) to be installed and available in PATH. You'll also need to have [configured](https://llm.datasette.io/en/stable/setup.html) **llm** with your choice of model and API keys.
+Requires [**yt-dlp**](https://github.com/yt-dlp/yt-dlp) and [**llm**](https://github.com/simonw/llm) to be installed and available in PATH. 
+
+By default, the model currently uses Claude 3.5 Haiku, and the [Fabric Summarization](https://github.com/danielmiessler/fabric/tree/main/patterns/summarize) pattern. For these, you'll need to install the [llm-templates-fabric](https://github.com/simonw/llm-templates-fabric) and [llm-anthropic](https://github.com/simonw/llm-anthropic) plugins, and [configure](https://llm.datasette.io/en/stable/setup.html) **llm** with your API key.
+
+```bash
+llm install llm-templates-fabric llm-anthropic
+llm keys set anthropic
+```
 
 ## Installation
 
@@ -28,6 +35,7 @@ Basic usage:
 - `-k`: **Keep** the transcript txt file after processing
 - `-s`: **Skip** LLM summarisation and keep transcript txt file
 - `-p <prompt>`: Custom **prompt** for LLM (default: 'Summarise the provided YouTube transcript.')
+- `-m <model>`: LLM **model** to use (default: 'claude-3.5-haiku')
 
 ### Examples
 
@@ -48,7 +56,12 @@ Basic usage:
 
 4. Custom summarization prompt:
 ```bash
-./yt-summary.sh -p "Write the most surprising point from this transcript as a haiku" <YouTube URL>
+./yt-summary.sh -p "Summarise this YouTube transcript in a pirate voice" <YouTube URL>
+```
+
+5. Use a different model:
+```bash
+./yt-summary.sh -m "chatgpt-4o" <YouTube URL>
 ```
 
 ## Output Files
