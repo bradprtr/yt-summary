@@ -56,7 +56,7 @@ Basic usage:
 
 4. Custom summarization prompt:
 ```bash
-./yt-summary.sh -p "Write the most surprising point from this transcript as a haiku" <YouTube URL>
+./yt-summary.sh -p "Summarise this YouTube transcript in a pirate voice" <YouTube URL>
 ```
 
 5. Use a different model:
