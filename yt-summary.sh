@@ -144,7 +144,7 @@ if [ "$skip_llm" = false ]; then
         cat "$temp_dir/subtitles-${video_id}.txt" | llm -m "$model" "$prompt_string"
     else
         # Use default template
-        cat "$temp_dir/subtitles-${video_id}.txt" | llm -m "$model" -t fabric:summarize
+        cat "$temp_dir/subtitles-${video_id}.txt" | llm -m "$model" $prompt_string
     fi
 else
     echo "LLM summarisation skipped. Transcript saved as subtitles-${video_id}.txt"
