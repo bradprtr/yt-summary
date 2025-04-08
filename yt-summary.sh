@@ -139,7 +139,13 @@ rm -f "$srt_file"
 
 # Run LLM if not skipped
 if [ "$skip_llm" = false ]; then
-    cat "$temp_dir/subtitles-${video_id}.txt" | llm -m "$model" "${prompt_string}"
+    if [ "$custom_prompt" = true ]; then
+        # Custom prompt provided with -p
+        cat "$temp_dir/subtitles-${video_id}.txt" | llm -m "$model" "$prompt_string"
+    else
+        # Use default template
+        cat "$temp_dir/subtitles-${video_id}.txt" | llm -m "$model" -t fabric:summarize
+    fi
 else
     echo "LLM summarisation skipped. Transcript saved as subtitles-${video_id}.txt"
 fi
