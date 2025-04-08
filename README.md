@@ -35,6 +35,7 @@ Basic usage:
 - `-k`: **Keep** the transcript txt file after processing
 - `-s`: **Skip** LLM summarisation and keep transcript txt file
 - `-p <prompt>`: Custom **prompt** for LLM (default: 'Summarise the provided YouTube transcript.')
+- `-m <model>`: LLM **model** to use (default: 'claude-3.5-haiku')
 
 ### Examples
 
@@ -56,6 +57,11 @@ Basic usage:
 4. Custom summarization prompt:
 ```bash
 ./yt-summary.sh -p "Write the most surprising point from this transcript as a haiku" <YouTube URL>
+```
+
+5. Use a different model:
+```bash
+./yt-summary.sh -m "chatgpt-4o" <YouTube URL>
 ```
 
 ## Output Files

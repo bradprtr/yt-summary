@@ -2,10 +2,11 @@
 
 # Usage function
 usage() {
-  echo "Usage: $0 [-k] [-s] [-p prompt] <YouTube URL>"
+  echo "Usage: $0 [-k] [-s] [-p prompt] [-m model] <YouTube URL>"
   echo "  -k: Keep transcript txt file"
   echo "  -s: Skip LLM summarisation and keep transcript txt file"
   echo "  -p: Custom prompt for LLM (default: 'Summarise the provided YouTube transcript.')"
+  echo "  -m: LLM model to use (default: 'claude-3.5-haiku')"
   exit 1
 }
 
@@ -14,12 +15,20 @@ keep_files=false
 skip_llm=false
 prompt_string="-t fabric:summarize"
 custom_prompt=false
+model="claude-3.5-haiku"
 
 # Parse command-line options
-while getopts "ksp:" opt; do
+while getopts "ksm:p:" opt; do
   case "$opt" in
     k) keep_files=true ;;
     s) skip_llm=true; keep_files=true ;;
+    m)
+      if [ -z "$OPTARG" ]; then
+        echo "Error: -m option requires a non-empty string argument." >&2
+        usage
+      fi
+      model="$OPTARG"
+      ;;
     p)
       if [ -z "$OPTARG" ]; then
         echo "Error: -p option requires a non-empty string argument." >&2
@@ -31,6 +40,8 @@ while getopts "ksp:" opt; do
     :)
       if [ "$OPTARG" = "p" ]; then
         echo "Error: -p option requires a non-empty string argument." >&2
+      elif [ "$OPTARG" = "m" ]; then
+        echo "Error: -m option requires a non-empty string argument." >&2
       else
         echo "Error: Option -$OPTARG requires an argument." >&2
       fi
@@ -128,7 +139,7 @@ rm -f "$srt_file"
 
 # Run LLM if not skipped
 if [ "$skip_llm" = false ]; then
-    cat "$temp_dir/subtitles-${video_id}.txt" | llm -m claude-3.5-haiku "${prompt_string}"
+    cat "$temp_dir/subtitles-${video_id}.txt" | llm -m "$model" "${prompt_string}"
 else
     echo "LLM summarisation skipped. Transcript saved as subtitles-${video_id}.txt"
 fi
