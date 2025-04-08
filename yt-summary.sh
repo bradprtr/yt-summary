@@ -12,7 +12,7 @@ usage() {
 # Initialize variables
 keep_files=false
 skip_llm=false
-prompt_string="Summarise the provided YouTube transcript."
+prompt_string="-t fabric:summarize"
 custom_prompt=false
 
 # Parse command-line options
@@ -128,7 +128,7 @@ rm -f "$srt_file"
 
 # Run LLM if not skipped
 if [ "$skip_llm" = false ]; then
-    cat "$temp_dir/subtitles-${video_id}.txt" | llm -m claude-3-haiku -s "$prompt_string"
+    cat "$temp_dir/subtitles-${video_id}.txt" | llm -m claude-3.5-haiku "${prompt_string}"
 else
     echo "LLM summarisation skipped. Transcript saved as subtitles-${video_id}.txt"
 fi
