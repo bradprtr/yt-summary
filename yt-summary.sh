@@ -15,7 +15,7 @@ keep_files=false
 skip_llm=false
 prompt_string="-t fabric:summarize"
 custom_prompt=false
-model="claude-3.5-haiku"
+model="gemini-2.0-flash"
 
 # Parse command-line options
 while getopts "ksm:p:" opt; do
