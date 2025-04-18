@@ -4,7 +4,7 @@ A script which downloads transcripts of YouTube videos (using auto-generated or 
 
 Requires [**yt-dlp**](https://github.com/yt-dlp/yt-dlp) and [**llm**](https://github.com/simonw/llm) to be installed and available in PATH. 
 
-By default, the model currently uses Gemini 2.0 Flash, and the [Fabric Summarization](https://github.com/danielmiessler/fabric/tree/main/patterns/summarize) pattern. For these, you'll need to install the [llm-templates-fabric](https://github.com/simonw/llm-templates-fabric) and [llm-gemini](https://github.com/simonw/llm-gemini) plugins, and [configure](https://llm.datasette.io/en/stable/setup.html) **llm** with your API key.
+By default, the LLM used is Gemini 2.0 Flash, with the [Fabric Summarization](https://github.com/danielmiessler/fabric/tree/main/patterns/summarize) pattern. For these, you'll need to install the [llm-templates-fabric](https://github.com/simonw/llm-templates-fabric) and [llm-gemini](https://github.com/simonw/llm-gemini) plugins, and [configure](https://llm.datasette.io/en/stable/setup.html) **llm** with your API key.
 
 ```bash
 llm install llm-templates-fabric llm-gemini

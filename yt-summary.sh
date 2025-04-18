@@ -6,7 +6,7 @@ usage() {
   echo "  -k: Keep transcript txt file"
   echo "  -s: Skip LLM summarisation and keep transcript txt file"
   echo "  -p: Custom prompt for LLM (default: 'Summarise the provided YouTube transcript.')"
-  echo "  -m: LLM model to use (default: 'claude-3.5-haiku')"
+  echo "  -m: LLM model to use (default: 'gemini-2.0-flash')"
   exit 1
 }
 
